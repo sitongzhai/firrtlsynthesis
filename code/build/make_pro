@@ -1,0 +1,11 @@
+#!/bin/bash
+pushd $(pwd) > /dev/null
+cd $(dirname ${BASH_SOURCE:-$0})
+
+cd ..
+echo $PWD
+qmake -makefile .qmake.cache.pro
+qmake -makefile -recursive firrtlsyn.pro $@
+popd > /dev/null
+
+

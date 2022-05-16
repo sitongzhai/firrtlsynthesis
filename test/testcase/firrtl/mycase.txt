@@ -1,0 +1,51 @@
+mycase:
+  AddSub
+  And2
+  Compare
+  Complex2R1WCMem
+  Complex2R1WCMem.lo
+  Complex2R1WSMem
+  Complex2R1WSMem.lo
+  Complex2R2WCMem
+  Complex2R2WCMem.lo
+  Complex2R2WSMem
+  Complex2R2WSMem.lo
+  Complex3R3WCMem
+  Complex3R3WCMem.lo
+  Complex3R3WSMem
+  Complex3R3WSMem.lo
+  Cvt
+  LogicOp
+  Memo
+  Mux4
+  OpShift
+  Pad
+  ReadwriterTester
+  ReadwriterTester1
+  ReadwriterTester2
+  ReadwriterTester3
+  SimpleCMemMRROM
+  SimpleCMemMRROM.lo
+  SimpleCMemRAM
+  SimpleCMemRAM.lo
+  SimpleCMemROM
+  SimpleCMemROM.lo
+  SimpleSMemMRROM
+  SimpleSMemMRROM.lo
+  SimpleSMemRAM
+  SimpleSMemRAM.lo
+  SimpleSMemROM
+  SimpleSMemROM.lo
+  SortFixedWithReset
+  VendingMachineSwitch
+
+failed with old version:
+  AsyncResetTester
+  CRSFile
+  IntervalAddTester
+  IntervalChainedAddTester
+  IntervalChainedSubTester
+  IntervalTester
+  IntervalTester2
+
+all cases are from treadle/sample and firrtl/regress

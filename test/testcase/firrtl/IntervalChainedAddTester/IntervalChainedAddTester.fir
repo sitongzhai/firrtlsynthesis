@@ -1,0 +1,45 @@
+;buildInfoPackage: chisel3, version: 3.4-SNAPSHOT, scalaVersion: 2.12.12, sbtVersion: 1.3.9
+circuit IntervalChainedAddTester : 
+  module IntervalChainedAddTester : 
+    input clock : Clock
+    input reset : UInt<1>
+    output io : {}
+    
+    wire intervalResult : Interval[?, ?].0 @[IntervalSpec.scala 365:28]
+    wire uintResult : UInt @[IntervalSpec.scala 366:24]
+    node _intervalResult_T = add(asInterval(UInt<2>("h01"), 1, 1, 0), asInterval(UInt<2>("h01"), 1, 1, 0)) @[IntervalSpec.scala 368:25]
+    node _intervalResult_T_1 = add(_intervalResult_T, asInterval(UInt<2>("h01"), 1, 1, 0)) @[IntervalSpec.scala 368:31]
+    node _intervalResult_T_2 = add(_intervalResult_T_1, asInterval(UInt<2>("h01"), 1, 1, 0)) @[IntervalSpec.scala 368:37]
+    node _intervalResult_T_3 = add(_intervalResult_T_2, asInterval(UInt<2>("h01"), 1, 1, 0)) @[IntervalSpec.scala 368:43]
+    node _intervalResult_T_4 = add(_intervalResult_T_3, asInterval(UInt<2>("h01"), 1, 1, 0)) @[IntervalSpec.scala 368:49]
+    node _intervalResult_T_5 = add(_intervalResult_T_4, asInterval(UInt<2>("h01"), 1, 1, 0)) @[IntervalSpec.scala 368:55]
+    intervalResult <= _intervalResult_T_5 @[IntervalSpec.scala 368:18]
+    node _uintResult_T = add(UInt<1>("h01"), UInt<1>("h01")) @[IntervalSpec.scala 369:21]
+    node _uintResult_T_1 = add(_uintResult_T, UInt<1>("h01")) @[IntervalSpec.scala 369:28]
+    node _uintResult_T_2 = add(_uintResult_T_1, UInt<1>("h01")) @[IntervalSpec.scala 369:35]
+    node _uintResult_T_3 = add(_uintResult_T_2, UInt<1>("h01")) @[IntervalSpec.scala 369:42]
+    node _uintResult_T_4 = add(_uintResult_T_3, UInt<1>("h01")) @[IntervalSpec.scala 369:49]
+    node _uintResult_T_5 = add(_uintResult_T_4, UInt<1>("h01")) @[IntervalSpec.scala 369:56]
+    uintResult <= _uintResult_T_5 @[IntervalSpec.scala 369:14]
+    node _T = eq(intervalResult, asInterval(UInt<4>("h07"), 7, 7, 0)) @[IntervalSpec.scala 371:25]
+    node _T_1 = bits(reset, 0, 0) @[IntervalSpec.scala 371:9]
+    node _T_2 = or(_T, _T_1) @[IntervalSpec.scala 371:9]
+    node _T_3 = eq(_T_2, UInt<1>("h00")) @[IntervalSpec.scala 371:9]
+    when _T_3 : @[IntervalSpec.scala 371:9]
+      printf(clock, UInt<1>(1), "Assertion failed\n    at IntervalSpec.scala:371 assert(intervalResult === 7.I)\n") @[IntervalSpec.scala 371:9]
+      stop(clock, UInt<1>(1), 1) @[IntervalSpec.scala 371:9]
+      skip @[IntervalSpec.scala 371:9]
+    node _T_4 = eq(uintResult, UInt<3>("h07")) @[IntervalSpec.scala 372:21]
+    node _T_5 = bits(reset, 0, 0) @[IntervalSpec.scala 372:9]
+    node _T_6 = or(_T_4, _T_5) @[IntervalSpec.scala 372:9]
+    node _T_7 = eq(_T_6, UInt<1>("h00")) @[IntervalSpec.scala 372:9]
+    when _T_7 : @[IntervalSpec.scala 372:9]
+      printf(clock, UInt<1>(1), "Assertion failed\n    at IntervalSpec.scala:372 assert(uintResult === 7.U)\n") @[IntervalSpec.scala 372:9]
+      stop(clock, UInt<1>(1), 1) @[IntervalSpec.scala 372:9]
+      skip @[IntervalSpec.scala 372:9]
+    node _T_8 = bits(reset, 0, 0) @[IntervalSpec.scala 373:7]
+    node _T_9 = eq(_T_8, UInt<1>("h00")) @[IntervalSpec.scala 373:7]
+    when _T_9 : @[IntervalSpec.scala 373:7]
+      stop(clock, UInt<1>(1), 0) @[IntervalSpec.scala 373:7]
+      skip @[IntervalSpec.scala 373:7]
+    

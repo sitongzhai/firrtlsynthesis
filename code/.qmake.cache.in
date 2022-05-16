@@ -1,0 +1,2 @@
+top_srcdir = $$OUT_PWD
+top_builddir = $$OUT_PWD

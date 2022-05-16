@@ -1,0 +1,25 @@
+module DoesAbs( // @[:@3.2]
+  input        clock, // @[:@4.4]
+  input        reset, // @[:@5.4]
+  input  [3:0] io_uIn, // @[:@6.4]
+  input  [3:0] io_sIn, // @[:@6.4]
+  input  [4:0] io_fIn, // @[:@6.4]
+  output [3:0] io_uAbsGrow, // @[:@6.4]
+  output [3:0] io_uAbsWrap, // @[:@6.4]
+  output [4:0] io_sAbsGrow, // @[:@6.4]
+  output [3:0] io_sAbsWrap, // @[:@6.4]
+  output [5:0] io_fAbsGrow, // @[:@6.4]
+  output [4:0] io_fAbsWrap // @[:@6.4]
+);
+  wire  _T_8 = $signed(io_sIn) >= 4'sh0; // @[SIntTypeClass.scala 144:45:@13.4]
+  wire [4:0] _T_11 = 4'sh0 - $signed(io_sIn); // @[SIntTypeClass.scala 31:22:@14.4]
+  wire [3:0] _T_21 = 4'sh0 - $signed(io_sIn); // @[SIntTypeClass.scala 32:22:@20.4]
+  wire [5:0] _T_27 = 5'sh0 - $signed(io_fIn); // @[FixedPointTypeClass.scala 34:22:@24.4]
+  wire [4:0] _T_37 = 5'sh0 - $signed(io_fIn); // @[FixedPointTypeClass.scala 35:22:@30.4]
+  assign io_uAbsGrow = io_uIn;
+  assign io_uAbsWrap = io_uIn;
+  assign io_sAbsGrow = _T_8 ? $signed({{1{io_sIn[3]}},io_sIn}) : $signed(_T_11); // @[SIntTypeClass.scala 143:8:@15.4]
+  assign io_sAbsWrap = _T_8 ? $signed(io_sIn) : $signed(_T_21); // @[SIntTypeClass.scala 143:8:@21.4]
+  assign io_fAbsGrow = io_fIn[4] ? $signed(_T_27) : $signed({{1{io_fIn[4]}},io_fIn}); // @[FixedPointTypeClass.scala 207:8:@25.4]
+  assign io_fAbsWrap = io_fIn[4] ? $signed(_T_37) : $signed(io_fIn); // @[FixedPointTypeClass.scala 207:8:@31.4]
+endmodule

@@ -1,0 +1,2 @@
+2021-05-18
+不等价原因是无法使用firrtl产生golden版本的verilog文件
