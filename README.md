@@ -133,9 +133,15 @@ All tcl commands need to be registered in function "int registerAllCmds(Tcl_Inte
 
 ## References
 [1] ] P. S. Li, A. M. Izraelevitz, and J. Bachrach, “Specification for the firrtl language,” EECS Department, University of California, Berkeley, Tech. Rep. UCB/EECS-2016-9, 2016.
+
 [2] “Chisel/firrtl hardware compiler framework,” Website, https://www.chisel-lang.org/.
+
 [3] A. Izraelevitz, J. Koenig, P. Li, R. Lin, A. Wang, A. Magyar, D. Kim, C. Schmidt, C. Markley, J. Lawson et al., “Reusability is firrtl ground: Hardware construction languages, compiler frameworks, and transformations,” in 2017 IEEE/ACM International Conference on Computer-Aided Design (ICCAD). IEEE, 2017, pp. 209–216.
+
 [4] J. Bachrach, H. Vo, B. Richards, Y. Lee, A. Waterman, R. Aviˇzienis, J. Wawrzynek, and K. Asanovi´c, “Chisel: constructing hardware in a scala embedded language,” in DAC Design Automation Conference 2012. IEEE, 2012, pp. 1212–1221.
+
 [5] K. Asanovic, R. Avizienis, J. Bachrach, S. Beamer, D. Biancolin, C. Celio, H. Cook, D. Dabbelt, J. Hauser, A. Izraelevitz et al., “The rocket chip generator,” EECS Department, University of California, Berkeley, Tech. Rep. UCB/EECS-2016-17, 2016.
+
 [6] “A chisel/firrtl execution engine,” Website, https://github.com/chipsalliance/treadlel.
+
 [7] “Flexible internal representation for rtl,” Website, https://github.com/chipsalliance/firrtl.
