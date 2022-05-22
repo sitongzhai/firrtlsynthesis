@@ -4741,12 +4741,12 @@ namespace firrtlsyn {
 
   /*********************************************************
   * Function: transferIdExpression
-  * Input: 
-  *   exp_id: ת������ʽ�õ���ID.
-  *   tail_id: ����Type�õ���ID��׺����������ƴ�ӱ���ʽID.
-  *   exp: ��ת���ı���ʽ.
-  * Return: ���ر���ʽת���Ƿ�ɹ�.
-  * Example: 
+  * Input:
+  *   exp_id: 转换表达式得到的ID.
+  *   tail_id: 解析Type得到的ID后缀，传入用于拼接表达式ID.
+  *   exp: 待转换的表达式.
+  * Return: 返回表达式转换是否成功.
+  * Example:
   * exp: T_11[T_26].valid[0]
   * tail_id: $x
   **********************************************************/
@@ -4763,12 +4763,12 @@ namespace firrtlsyn {
   /*********************************************************
   * Function: transferIdExpByExpType
   * Input:
-  *   exp_id: ת������ʽ�õ���ID.
-  *   tail_id: ����Type�õ���ID��׺����������ƴ�ӱ���ʽID.
-  *   exp: ��ת���ı���ʽ.
-  *   sel_node: ����subaccessʱ������select�ź�
-  *   last_node: ����subaccessʱ��ѯdepthʱ�ϴβ�����mux_node
-  * Return: ���ر���ʽת���Ƿ�ɹ�.
+  *   exp_id: 转换表达式得到的ID.
+  *   tail_id: 解析Type得到的ID后缀，传入用于拼接表达式ID.
+  *   exp: 待转换的表达式.
+  *   sel_node: 解析subaccess时产生的select信号
+  *   last_node: 解析subaccess时轮询depth时上次产生的mux_node
+  * Return: 返回表达式转换是否成功.
   * Example:
   * exp: T_11[T_26].valid[0]
   * tail_id: $x
@@ -4802,12 +4802,12 @@ namespace firrtlsyn {
   /*********************************************************************
   * Function: transferReferenceExpression
   * Input:
-  *   exp_id: ת������ʽ�õ���ID.
-  *   tail_id: ����Type�õ���ID��׺����������ƴ�ӱ���ʽID.
-  *   exp: ��ת���ı���ʽ.
-  *   sel_node: ����subaccessʱ������select�ź�
-  *   last_node: ����subaccessʱ��ѯdepthʱ�ϴβ�����mux_node
-  * Return: ���ر���ʽת���Ƿ�ɹ�.
+  *   exp_id: 转换表达式得到的ID.
+  *   tail_id: 解析Type得到的ID后缀，传入用于拼接表达式ID.
+  *   exp: 待转换的表达式.
+  *   sel_node: 解析subaccess时产生的select信号
+  *   last_node: 解析subaccess时轮询depth时上次产生的mux_node
+  * Return: 返回表达式转换是否成功.
   * Example:
   *   Input:
   *     exp: T_11
@@ -4896,12 +4896,12 @@ namespace firrtlsyn {
   /*********************************************************
   * Function: transferSubfieldExpression
   * Input:
-  *   exp_id: ת������ʽ�õ���ID.
-  *   tail_id: ����Type�õ���ID��׺����������ƴ�ӱ���ʽID.
-  *   exp: ��ת���ı���ʽ.
-  *   sel_node: ����subaccessʱ������select�ź�
-  *   last_node: ����subaccessʱ��ѯdepthʱ�ϴβ�����mux_node
-  * Return: ���ر���ʽת���Ƿ�ɹ�.
+  *   exp_id: 转换表达式得到的ID.
+  *   tail_id: 解析Type得到的ID后缀，传入用于拼接表达式ID.
+  *   exp: 待转换的表达式.
+  *   sel_node: 解析subaccess时产生的select信号
+  *   last_node: 解析subaccess时轮询depth时上次产生的mux_node
+  * Return: 返回表达式转换是否成功.
   * Example:
   *   Input:
   *     exp: T_11[T_26].valid
@@ -4953,12 +4953,12 @@ namespace firrtlsyn {
   /*********************************************************
   * Function: transferSubindexExpression
   * Input:
-  *   exp_id: ת������ʽ�õ���ID.
-  *   tail_id: ����Type�õ���ID��׺����������ƴ�ӱ���ʽID.
-  *   exp: ��ת���ı���ʽ.
-  *   sel_node: ����subaccessʱ������select�ź�
-  *   last_node: ����subaccessʱ��ѯdepthʱ�ϴβ�����mux_node
-  * Return: ���ر���ʽת���Ƿ�ɹ�.
+  *   exp_id: 转换表达式得到的ID.
+  *   tail_id: 解析Type得到的ID后缀，传入用于拼接表达式ID.
+  *   exp: 待转换的表达式.
+  *   sel_node: 解析subaccess时产生的select信号
+  *   last_node: 解析subaccess时轮询depth时上次产生的mux_node
+  * Return: 返回表达式转换是否成功.
   * Example:
   *   Input:
   *     exp: T_11[T_26].valid[0]
@@ -5001,12 +5001,12 @@ namespace firrtlsyn {
   /*********************************************************
   * Function: transferSubaccessExpression
   * Input:
-  *   exp_id: ת������ʽ�õ���ID.
-  *   tail_id: ����Type�õ���ID��׺����������ƴ�ӱ���ʽID.
-  *   exp: ��ת���ı���ʽ.
-  *   sel_node: ����subaccessʱ������select�ź�
-  *   last_node: ����subaccessʱ��ѯdepthʱ�ϴβ�����mux_node
-  * Return: ���ر���ʽת���Ƿ�ɹ�.
+  *   exp_id: 转换表达式得到的ID.
+  *   tail_id: 解析Type得到的ID后缀，传入用于拼接表达式ID.
+  *   exp: 待转换的表达式.
+  *   sel_node: 解析subaccess时产生的select信号
+  *   last_node: 解析subaccess时轮询depth时上次产生的mux_node
+  * Return: 返回表达式转换是否成功.
   * Example:
   *   Input:
   *     exp: T_11[T_26]
