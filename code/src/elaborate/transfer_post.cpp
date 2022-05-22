@@ -21,7 +21,6 @@ namespace firrtlsyn {
 
   TransferPost::TransferPost(firDB::firLibrary* library) {
     clear();
-    interpunct_ = '$';
     instance_label_ = '.';
     add_node_num_ = 0;
     node_id_ = "$node$";
@@ -481,7 +480,7 @@ namespace firrtlsyn {
     fs_assert(type != NULL && port != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
       firDB::firType* vtype = type->type_data();
-      std::string new_id = id + interpunct() + std::to_string(i);
+      std::string new_id = id + opt.hyphen() + std::to_string(i);
       if (!transferTypeToPostPort(new_id, port, vtype)) {
         return false;
       }
@@ -493,7 +492,7 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_id = id + interpunct() + type_datas[i]->field_id();
+      std::string new_id = id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferTypeToPostPort(new_id, port, btype)) {
         return false;
       }
@@ -1050,7 +1049,7 @@ namespace firrtlsyn {
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
       firDB::firType* vtype = type->type_data();
-      std::string new_id = id + interpunct() + std::to_string(i);
+      std::string new_id = id + opt.hyphen() + std::to_string(i);
       if (!transferTypeToPostWire(new_id, vtype)) {
         return false;
       }
@@ -1062,7 +1061,7 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_id = id + interpunct() + type_datas[i]->field_id();
+      std::string new_id = id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferTypeToPostWire(new_id, btype)) {
         return false;
       }
@@ -1675,8 +1674,8 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < type->depth(); i++) {
       firDB::firType* vtype = type->type_data();
       firDB::firType* reset_vtype = reg_init_type->type_data();
-      std::string new_id = id + interpunct() + std::to_string(i);
-      std::string new_reg_init_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_id = id + opt.hyphen() + std::to_string(i);
+      std::string new_reg_init_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferResetIdExpByType(new_reg_init_tail_id, new_id, vtype, clock_signal_exp, reg_reset_exp, reg_init_exp, reset_vtype)) {
         return false;
       }
@@ -1690,8 +1689,8 @@ namespace firrtlsyn {
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
       firDB::firType* reg_init_btype = reset_type_datas[i]->type_data();
-      std::string new_id = id + interpunct() + type_datas[i]->field_id();
-      std::string new_reset_tail_id = tail_id + interpunct() + reset_type_datas[i]->field_id();
+      std::string new_id = id + opt.hyphen() + type_datas[i]->field_id();
+      std::string new_reset_tail_id = tail_id + opt.hyphen() + reset_type_datas[i]->field_id();
       if (!transferResetIdExpByType(new_reset_tail_id, new_id, btype, clock_signal_exp, reg_reset_exp, reg_init_exp, reg_init_btype)) {
         return false;
       }
@@ -1773,7 +1772,7 @@ namespace firrtlsyn {
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
       firDB::firType* vtype = type->type_data();
-      std::string new_id = id + interpunct() + std::to_string(i);
+      std::string new_id = id + opt.hyphen() + std::to_string(i);
       if (!transferTypeToPostRegister(new_id, vtype, clock_signal_exp)) {
         return false;
       }
@@ -1785,7 +1784,7 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_id = id + interpunct() + type_datas[i]->field_id();
+      std::string new_id = id + opt.hyphen() + type_datas[i]->field_id();
       std::string reg_init_refid;
       if (!transferTypeToPostRegister(new_id, btype, clock_signal_exp)) {
         return false;
@@ -2086,7 +2085,7 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_id = id + interpunct() + type_datas[i]->field_id();
+      std::string new_id = id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferVectorTypeToPostMemory(item, new_id, btype, depth)) {
         return false;
       }
@@ -2098,7 +2097,7 @@ namespace firrtlsyn {
     fs_assert(type != NULL);
     firDB::firType* btype = type->type_data();
     for (unsigned int i = 0; i < type->depth(); i++) {
-      std::string new_id = id + interpunct() + std::to_string(i);
+      std::string new_id = id + opt.hyphen() + std::to_string(i);
       if (!transferVectorTypeToPostMemory(item, new_id, btype, depth)) {
         return false;
       }
@@ -2415,7 +2414,7 @@ namespace firrtlsyn {
     firDB::firExp* rexp = NULL;
     firDB::firModule* module = fir_module();
     fs_assert(module != NULL);
-    if (TransferPost::opt.get_optimize_exp()) {
+    if (TransferPost::opt.optimize_exp()) {
       firDB::firExp* exp_value = NULL;
       try {
         exp_value = primOp->inferExpVal(module, cur_cond());
@@ -4050,7 +4049,7 @@ namespace firrtlsyn {
     firDB::firModule* module = fir_module();
     fs_assert(module != NULL);
     firDB::firExp* exp_value = NULL;
-    if (TransferPost::opt.get_optimize_exp()) {
+    if (TransferPost::opt.optimize_exp()) {
       exp_value = exp->inferExpVal(module, cur_cond());
     }
     if (exp_value != NULL) {
@@ -4129,8 +4128,8 @@ namespace firrtlsyn {
     fs_assert(exp != NULL);
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
-      std::string new_node_id = node_id + interpunct() + std::to_string(i);
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_node_id = node_id + opt.hyphen() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       firDB::firType* type_data = type->type_data();
       if (!transferIdExpNodeByType(new_node_id, new_tail_id, exp, type_data)) {
         fs_assert(0);
@@ -4145,8 +4144,8 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_node_id = node_id + interpunct() + type_datas[i]->field_id();
-      std::string new_tail_id = tail_id + interpunct() + type_datas[i]->field_id();
+      std::string new_node_id = node_id + opt.hyphen() + type_datas[i]->field_id();
+      std::string new_tail_id = tail_id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferIdExpNodeByType(new_node_id, new_tail_id, exp, btype)) {
         fs_assert(0);
         return false;
@@ -4207,8 +4206,8 @@ namespace firrtlsyn {
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
       firDB::firType* type_data = type->type_data();
-      std::string new_node_id = node_id + interpunct() + std::to_string(i);
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_node_id = node_id + opt.hyphen() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferMuxNodeByType(new_node_id, new_tail_id, exp, type_data)) {
         fs_assert(0);
         return false;
@@ -4222,8 +4221,8 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_node_id = node_id + interpunct() + type_datas[i]->field_id();
-      std::string new_tail_id = tail_id + interpunct() + type_datas[i]->field_id();
+      std::string new_node_id = node_id + opt.hyphen() + type_datas[i]->field_id();
+      std::string new_tail_id = tail_id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferMuxNodeByType(new_node_id, new_tail_id, exp, btype)) {
         fs_assert(0);
         return false;
@@ -4289,8 +4288,8 @@ namespace firrtlsyn {
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
       firDB::firType* type_data = type->type_data();
-      std::string new_node_id = node_id + interpunct() + std::to_string(i);
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_node_id = node_id + opt.hyphen() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferValidifNodeByType(new_node_id, new_tail_id, exp, type_data)) {
         fs_assert(0);
         return false;
@@ -4304,8 +4303,8 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_node_id = node_id + interpunct() + type_datas[i]->field_id();
-      std::string new_tail_id = tail_id + interpunct() + type_datas[i]->field_id();
+      std::string new_node_id = node_id + opt.hyphen() + type_datas[i]->field_id();
+      std::string new_tail_id = tail_id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferValidifNodeByType(new_node_id, new_tail_id, exp, btype)) {
         fs_assert(0);
         return false;
@@ -4566,7 +4565,7 @@ namespace firrtlsyn {
   bool TransferPost::transferTypeVectorToPostMPort(const std::string& mem_id, firDB::firItemMPort* mport, firDB::firTypeVector* type) {
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
-      std::string new_mem_id = mem_id + interpunct() + std::to_string(i);
+      std::string new_mem_id = mem_id + opt.hyphen() + std::to_string(i);
       if (!transferTypeToPostMPort(new_mem_id, mport, type->type_data())) {
         return false;
       }
@@ -4577,7 +4576,7 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_mem_id = mem_id + interpunct() + type_datas[i]->field_id();
+      std::string new_mem_id = mem_id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferTypeToPostMPort(new_mem_id, mport, btype)) {
         return false;
       }
@@ -4682,7 +4681,7 @@ namespace firrtlsyn {
   bool TransferPost::transferTypeVectorToPostWhenMPort(const std::string& mem_id, firDB::firItemMPort* mport, firDB::firTypeVector* type, firDB::firExp* addr_exp, firDB::firExp* en_exp, firDB::firExp* clk_exp) {
     fs_assert(type != NULL);
     for (unsigned int i = 0; i < type->depth(); i++) {
-      std::string new_mem_id = mem_id + interpunct() + std::to_string(i);
+      std::string new_mem_id = mem_id + opt.hyphen() + std::to_string(i);
       if (!transferTypeToPostWhenMPort(new_mem_id, mport, type->type_data(), addr_exp, en_exp, clk_exp)) {
         return false;
       }
@@ -4693,7 +4692,7 @@ namespace firrtlsyn {
     std::vector<firDB::firField*>& type_datas = type->type_datas();
     for (size_t i = 0; i < type_datas.size(); i++) {
       firDB::firType* btype = type_datas[i]->type_data();
-      std::string new_mem_id = mem_id + interpunct() + type_datas[i]->field_id();
+      std::string new_mem_id = mem_id + opt.hyphen() + type_datas[i]->field_id();
       if (!transferTypeToPostWhenMPort(new_mem_id, mport, btype, addr_exp, en_exp, clk_exp)) {
         return false;
       }
@@ -4929,20 +4928,20 @@ namespace firrtlsyn {
         if (item_memory->hasPort(subfield_id)) {
           exp_id = instance_label() + subfield_id + exp_id;
         } else {
-          exp_id = interpunct() + subfield_id + exp_id;
+          exp_id = opt.hyphen() + subfield_id + exp_id;
         }
       }
     } else if (fir_item->isInstanceItem()) {
       if (exp->isReferenceExpression()) {
         exp_id = instance_label() + subfield_id + exp_id;
       } else {
-        exp_id = interpunct() + subfield_id + exp_id;
+        exp_id = opt.hyphen() + subfield_id + exp_id;
       }
     } else {
       if (exp_id.empty()) {
-        exp_id = interpunct() + subfield_id;
+        exp_id = opt.hyphen() + subfield_id;
       } else {
-        exp_id = interpunct() + subfield_id + exp_id;
+        exp_id = opt.hyphen() + subfield_id + exp_id;
       }
     }
     if (!transferIdExpByExpType(exp_id, tail_id, exp, sel_node, last_node)) {
@@ -4984,13 +4983,13 @@ namespace firrtlsyn {
         fs_assert(0);
         return false;
       } else {
-        exp_id = interpunct() + std::to_string(index) + exp_id;
+        exp_id = opt.hyphen() + std::to_string(index) + exp_id;
       }
     } else {
       if (exp_id.empty()) {
-        exp_id = interpunct() + std::to_string(index);
+        exp_id = opt.hyphen() + std::to_string(index);
       } else {
-        exp_id = interpunct() + std::to_string(index) + exp_id;
+        exp_id = opt.hyphen() + std::to_string(index) + exp_id;
       }
     }
     if (!transferIdExpByExpType(exp_id, tail_id, exp, sel_node, last_node)) {
@@ -5054,9 +5053,9 @@ namespace firrtlsyn {
           return false;
         }
         if (exp_id.empty()) {
-          exp_id = interpunct() + std::to_string(index);
+          exp_id = opt.hyphen() + std::to_string(index);
         } else {
-          exp_id = interpunct() + std::to_string(index) + exp_id;
+          exp_id = opt.hyphen() + std::to_string(index) + exp_id;
         }
         if (!transferIdExpByExpType(exp_id, tail_id, exp, sel_node, last_node)) {
           fs_assert(0);
@@ -5098,9 +5097,9 @@ namespace firrtlsyn {
       for (unsigned int i = 0; i < max_value; i++) {
         exp_id = ori_exp_id;
         if (exp_id.empty()) {
-          exp_id = interpunct() + std::to_string(i);
+          exp_id = opt.hyphen() + std::to_string(i);
         } else {
-          exp_id = interpunct() + std::to_string(i) + exp_id;
+          exp_id = opt.hyphen() + std::to_string(i) + exp_id;
         }
         firDB::firItemNode* new_sel_node = NULL;
         if (sel_node != NULL) {
@@ -5148,7 +5147,7 @@ namespace firrtlsyn {
       for (unsigned int i = 0; i < v_tval_type->depth(); i++) {
         firDB::firType* l_type_data = v_tval_type->type_data();
         firDB::firType* r_type_data = v_fval_type->type_data();
-        std::string new_suffix = mux_suffix + interpunct() + std::to_string(i);
+        std::string new_suffix = mux_suffix + opt.hyphen() + std::to_string(i);
         std::pair<firDB::firType*, firDB::firType*> mux_inputs_type = getMuxInputExpressionType(tail_id, new_suffix, l_type_data, r_type_data);
         if (mux_inputs_type.first != NULL && mux_inputs_type.second != NULL) {
           return mux_inputs_type;
@@ -5162,7 +5161,7 @@ namespace firrtlsyn {
       for (size_t i = 0; i < tval_type_datas.size(); i++) {
         firDB::firType* btype_tval = tval_type_datas[i]->type_data();
         firDB::firType* btype_fval = fval_type_datas[i]->type_data();
-        std::string new_suffix_id = mux_suffix + interpunct() + tval_type_datas[i]->field_id();
+        std::string new_suffix_id = mux_suffix + opt.hyphen() + tval_type_datas[i]->field_id();
         std::pair<firDB::firType*, firDB::firType*> mux_inputs_type = getMuxInputExpressionType(tail_id, new_suffix_id, btype_tval, btype_fval);
         if (mux_inputs_type.first != NULL && mux_inputs_type.second != NULL) {
           return mux_inputs_type;
@@ -5199,7 +5198,7 @@ namespace firrtlsyn {
         return iter->second;
       }
     }
-    if (TransferPost::opt.get_optimize_exp()) {
+    if (TransferPost::opt.optimize_exp()) {
       firDB::firExp* mux_value = NULL;
       try {
         mux_value = mux->inferExpVal(module, cur_cond());
@@ -5345,7 +5344,7 @@ namespace firrtlsyn {
     firDB::firExp* valid = validif->valid();
     firDB::firType* validif_type = val->getTypeData(module, cur_cond());
     fs_assert(validif_type != NULL);
-    if (TransferPost::opt.get_optimize_exp()) {
+    if (TransferPost::opt.optimize_exp()) {
       firDB::firExp* validif_value = NULL;
       try {
         validif_value = validif->inferExpVal(module, cur_cond());
@@ -5669,7 +5668,7 @@ namespace firrtlsyn {
     fs_assert(type_l != NULL);
     fs_assert(type_r != NULL);
     firDB::firExp* expr_value = NULL;
-    if (TransferPost::opt.get_optimize_exp()) {
+    if (TransferPost::opt.optimize_exp()) {
       firDB::firModule* module = fir_module();
       fs_assert(module != NULL);
       expr_value = exp_r->inferExpVal(module, cur_cond());
@@ -5802,7 +5801,7 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < type_r->depth(); i++) {
       firDB::firType* l_type_data = type_l->type_data();
       firDB::firType* r_type_data = type_r->type_data();
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferConnectByType(new_tail_id, exp_l, exp_r, l_type_data, r_type_data)) {
         fs_assert(0);
         return false;
@@ -5819,7 +5818,7 @@ namespace firrtlsyn {
     for (size_t i = 0; i < type_datas_l.size(); i++) {
       firDB::firType* btype_l = type_datas_l[i]->type_data();
       firDB::firType* btype_r = type_datas_r[i]->type_data();
-      std::string new_tail_id = tail_id + interpunct() + type_datas_l[i]->field_id();
+      std::string new_tail_id = tail_id + opt.hyphen() + type_datas_l[i]->field_id();
       if (type_datas_l[i]->flip() && type_datas_r[i]->flip()) {
         if (!transferConnectByType(new_tail_id, exp_r, exp_l, btype_r, btype_l)) {
           fs_assert(0);
@@ -5953,7 +5952,7 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < type_r->depth(); i++) {
       firDB::firType* l_type_data = type_l->type_data();
       firDB::firType* r_type_data = type_r->type_data();
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferMuxConnectByType(new_tail_id, exp_l, exp_r, l_type_data, r_type_data)) {
         fs_assert(0);
         return false;
@@ -5972,7 +5971,7 @@ namespace firrtlsyn {
     for (size_t i = 0; i < type_datas_l.size(); i++) {
       firDB::firType* btype_l = type_datas_l[i]->type_data();
       firDB::firType* btype_r = type_datas_r[i]->type_data();
-      std::string new_tail_id = tail_id + interpunct() + type_datas_l[i]->field_id();
+      std::string new_tail_id = tail_id + opt.hyphen() + type_datas_l[i]->field_id();
       if (!transferMuxConnectByType(new_tail_id, exp_l, exp_r, btype_l, btype_r)) {
         fs_assert(0);
         return false;
@@ -6099,7 +6098,7 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < type_r->depth(); i++) {
       firDB::firType* l_type_data = type_l->type_data();
       firDB::firType* r_type_data = type_r->type_data();
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferValidifConnectByType(new_tail_id, exp_l, validif, l_type_data, r_type_data)) {
         fs_assert(0);
         return false;
@@ -6118,7 +6117,7 @@ namespace firrtlsyn {
     for (size_t i = 0; i < type_datas_l.size(); i++) {
       firDB::firType* btype_l = type_datas_l[i]->type_data();
       firDB::firType* btype_r = type_datas_r[i]->type_data();
-      std::string new_tail_id = tail_id + interpunct() + type_datas_l[i]->field_id();
+      std::string new_tail_id = tail_id + opt.hyphen() + type_datas_l[i]->field_id();
       if (!transferValidifConnectByType(new_tail_id, exp_l, validif, btype_l, btype_r)) {
         fs_assert(0);
         return false;
@@ -6299,7 +6298,7 @@ namespace firrtlsyn {
     fs_assert(type_l != NULL);
     fs_assert(type_r != NULL);
     firDB::firExp* expr_value = NULL;
-    if (TransferPost::opt.get_optimize_exp()) {
+    if (TransferPost::opt.optimize_exp()) {
       firDB::firModule* module = fir_module();
       fs_assert(module != NULL);
       expr_value = exp_r->inferExpVal(module, cur_cond());
@@ -6379,7 +6378,7 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < size; i++) {
       firDB::firType* type_data_l = type_l->type_data();
       firDB::firType* type_data_r = type_r->type_data();
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferPartialConnectByType(new_tail_id, exp_l, exp_r, type_data_l, type_data_r)) {
         fs_assert(0);
         return false;
@@ -6403,7 +6402,7 @@ namespace firrtlsyn {
       if (iter != id_type_map.end()) {
         firDB::firType* data_type_r = iter->second;
         firDB::firType* data_type_l = type_datas_l[i]->type_data();
-        std::string new_tail_id = tail_id + interpunct() + type_datas_l[i]->field_id();
+        std::string new_tail_id = tail_id + opt.hyphen() + type_datas_l[i]->field_id();
         if (type_datas_l[i]->flip()) {
           if (!transferPartialConnectByType(new_tail_id, exp_r, exp_l, data_type_r, data_type_l)) {
             fs_assert(0);
@@ -6494,7 +6493,7 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < size; i++) {
       firDB::firType* type_data_l = type_l->type_data();
       firDB::firType* type_data_r = type_r->type_data();
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferMuxPartialConnectByType(new_tail_id, exp_l, exp_r, type_data_l, type_data_r)) {
         fs_assert(0);
         return false;
@@ -6518,7 +6517,7 @@ namespace firrtlsyn {
       if (iter != id_type_data_map.end()) {
         firDB::firType* new_type_r = type_datas_r[i]->type_data();
         firDB::firType* new_type_l = iter->second;
-        std::string new_tail_id = tail_id + interpunct() + iter->first;
+        std::string new_tail_id = tail_id + opt.hyphen() + iter->first;
         if (!transferMuxPartialConnectByType(new_tail_id, exp_l, exp_r, new_type_l, new_type_r)) {
           fs_assert(0);
           return false;
@@ -6602,7 +6601,7 @@ namespace firrtlsyn {
     for (unsigned int i = 0; i < size; i++) {
       firDB::firType* type_data_l = type_l->type_data();
       firDB::firType* type_data_r = type_r->type_data();
-      std::string new_tail_id = tail_id + interpunct() + std::to_string(i);
+      std::string new_tail_id = tail_id + opt.hyphen() + std::to_string(i);
       if (!transferValidifPartialConnectByType(new_tail_id, exp_l, validif, type_data_l, type_data_r)) {
         fs_assert(0);
         return false;
@@ -6626,7 +6625,7 @@ namespace firrtlsyn {
       if (iter != id_type_data_map.end()) {
         firDB::firType* new_type_r = type_datas_r[i]->type_data();
         firDB::firType* new_type_l = iter->second;
-        std::string new_tail_id = tail_id + interpunct() + iter->first;
+        std::string new_tail_id = tail_id + opt.hyphen() + iter->first;
         if (!transferValidifPartialConnectByType(new_tail_id, exp_l, validif, new_type_l, new_type_r)) {
           fs_assert(0);
           return false;

@@ -16,12 +16,18 @@ namespace firrtlsyn {
   public:
     class Option {
     public:
-      Option() { optimize_exp_ = true; }
+      Option() { 
+        optimize_exp_ = true; 
+        hyphen_ = '$';
+      }
       ~Option() {}
       void set_optimize_exp(bool optimize_exp) { optimize_exp_ = optimize_exp; }
-      bool get_optimize_exp() { return optimize_exp_; }
+      bool optimize_exp() { return optimize_exp_; }
+      void set_hyphen(char hyphen) { hyphen_ = hyphen; }
+      char hyphen() { return hyphen_; }
     private:
       bool optimize_exp_;
+      char hyphen_;
     };
 
   public:
@@ -68,14 +74,12 @@ namespace firrtlsyn {
     };
 
   private:
-    char interpunct() { return interpunct_; }
     char instance_label() { return instance_label_; }
     std::string getAddNodeId() {
       std::string r_node_id = node_id_ + std::to_string(add_node_num_);
       add_node_num_++;
       return r_node_id;
     }
-    void set_interpunct(char interpunct) { interpunct_ = interpunct; }
     void set_instance_label(char instance_label) { instance_label_ = instance_label; }
     firDB::firLibrary* library() { return library_; }
     firDB::firCircuit* post_circuit() { return post_circuit_; }
@@ -302,7 +306,6 @@ namespace firrtlsyn {
     firDB::firModule* fir_module_;
     long long unsigned int add_node_num_;
     std::string node_id_;
-    char interpunct_;
     char instance_label_;
     std::map<firDB::firModule*, firDB::firModule*> module_postmodule_map_;
     std::map<firDB::firLocObj*, std::map<std::string, Connect>> cond_connect_exps_map_;
