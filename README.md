@@ -1,7 +1,6 @@
 # FIRRTL Synthesis Tool
 
 ## Introduction
-**ToDo:** Will be updated after paper published.
 The FIRRTL Synthesis Tool (FST) is designed to facilitate the completion of the chisel tool chain. Primitive based firrtl synthesis flow separates the design of primitive macros from the design of circuits. FST tries to build an open source FIRRTL synthesis tool that does not rely on any existing synthesis tools.
 
 FST elaborates the FIRRTL to a primitive level netlist and then transfers to RTL or gate level netlist with an RTL or gate level macro library. FST supports all the features of FIRRTL not only in the specification but also the experimental features already in the Chisel\/FIRRTL project. 
