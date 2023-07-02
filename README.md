@@ -2,12 +2,11 @@
 
 ## Introduction
 **ToDo:** Will be updated after paper published.
-<!-- The FIRRTL Synthesis Tool (FST) is designed to facilitate the completion of the chisel tool chain. Primitive based firrtl synthesis flow separates the design of primitive macros from the design of circuits. FST tries to build an open source FIRRTL synthesis tool that does not rely on any existing synthesis tools.
+The FIRRTL Synthesis Tool (FST) is designed to facilitate the completion of the chisel tool chain. Primitive based firrtl synthesis flow separates the design of primitive macros from the design of circuits. FST tries to build an open source FIRRTL synthesis tool that does not rely on any existing synthesis tools.
 
 FST elaborates the FIRRTL to a primitive level netlist and then transfers to RTL or gate level netlist with an RTL or gate level macro library. FST supports all the features of FIRRTL not only in the specification but also the experimental features already in the Chisel\/FIRRTL project. 
 
 FST is built as an extensible framework so it can be used easily as the basis for custom FIRRTL synthesis and as an environment for implementation and research on primitive or gate level netlist optimization algorithms. In addition, an RTL level primitive macro library has been designed in this paper. With this library, the generated primitive level netlists all have passed the logical equivalent check (LEC) by Conformal from Cadence. 
-  -->
   
 ## License
 All FST source code is under MIT license.
